@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
     color: '#886DFA',
   },
   buttonStyle: {
-    display: 'block',
     border: 0,
     marginBottom: '20px',
     borderRadius: '10%',
