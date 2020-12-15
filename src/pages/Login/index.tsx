@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 
-import { loginUser } from '../../redux/actions/auth'
+import { loginUser } from '../../redux/actions/user'
 
 import './style.scss'
 
