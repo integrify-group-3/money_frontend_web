@@ -19,18 +19,18 @@ import logo from '../../imgs/logo.svg'
 const linkStyle = {
   textDecoration: 'none',
   color: 'white',
-  opacity: '0.9'
+  opacity: '0.9',
 }
 const navIconStyle = {
   color: 'white',
-  opacity: '0.9'
+  opacity: '0.9',
 }
 
 export const mainListItems = (
-  <div>  
-    <ListSubheader style={{display: 'flex', justifyContent: 'flex-start'}}>
-      <img src={logo} alt="app logo" style={{marginLeft: '0.2rem'}}/> 
-      <span style={{marginLeft: '1.65rem', color: 'white'}}>IMoney</span>
+  <div>
+    <ListSubheader style={{ display: 'flex', justifyContent: 'flex-start' }}>
+      <img src={logo} alt="app logo" style={{ marginLeft: '0.2rem' }} />
+      <span style={{ marginLeft: '1.65rem', color: 'white' }}>IMoney</span>
     </ListSubheader>
     <ListItem button>
       <ListItemIcon>
@@ -46,7 +46,7 @@ export const mainListItems = (
         <ListItemText primary="Expenses" />
       </ListItem>
     </NavLink>
-    <NavLink to ="/analytics">
+    <NavLink to="/analytics">
       <ListItem button>
         <ListItemIcon>
           <TrendingUpIcon style={navIconStyle} />
@@ -57,24 +57,24 @@ export const mainListItems = (
     <NavLink to="/profile">
       <ListItem button>
         <ListItemIcon>
-          <PersonIcon style={navIconStyle}/>
+          <PersonIcon style={navIconStyle} />
         </ListItemIcon>
         <ListItemText primary="Profile" />
       </ListItem>
     </NavLink>
   </div>
-);
+)
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader style={{display: 'flex', justifyContent: 'flex-start'}}>
-      <img src={logo} alt="app logo" style={{marginLeft: '0.2rem'}}/> 
-      <span style={{marginLeft: '1.65rem', color: 'white'}}>IMoney</span>
+    <ListSubheader style={{ display: 'flex', justifyContent: 'flex-start' }}>
+      <img src={logo} alt="app logo" style={{ marginLeft: '0.2rem' }} />
+      <span style={{ marginLeft: '1.65rem', color: 'white' }}>IMoney</span>
     </ListSubheader>
     <NavLink to="/register" style={linkStyle}>
       <ListItem button>
         <ListItemIcon>
-          <PersonAddIcon style={navIconStyle}/>
+          <PersonAddIcon style={navIconStyle} />
         </ListItemIcon>
         <ListItemText primary="Sign up" />
       </ListItem>
@@ -82,19 +82,18 @@ export const secondaryListItems = (
     <NavLink to="/login" style={linkStyle}>
       <ListItem button>
         <ListItemIcon>
-          <ExitToAppIcon style={navIconStyle}/>
+          <ExitToAppIcon style={navIconStyle} />
         </ListItemIcon>
         <ListItemText primary="Sign in" />
       </ListItem>
     </NavLink>
-    <NavLink to ="/home" style={linkStyle}>
+    <NavLink to="/" style={linkStyle}>
       <ListItem button>
         <ListItemIcon>
-          <HomeIcon style={navIconStyle}/>
+          <HomeIcon style={navIconStyle} />
         </ListItemIcon>
         <ListItemText primary="Home" />
       </ListItem>
     </NavLink>
   </div>
-);
-
+)
