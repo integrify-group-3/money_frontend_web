@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '10%',
     position: 'absolute',
     top: '50%',
-    left: '50%',
+    left: '40%',
     transform: 'translateY(-50%)',
   },
   HeaderStyle: {

@@ -17,6 +17,7 @@
     "@types/redux-saga": "^0.10.5",
     "@types/redux-thunk": "^2.1.0",
     "axios": "^0.21.0",
+    "formik": "^2.2.6",
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "react": "^16.12.0",

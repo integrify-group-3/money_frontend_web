@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import {
   CssBaseline,
-  InputBase,
+  TextField,
   makeStyles,
   Typography,
   Grid,
@@ -25,20 +25,13 @@ const useStyles = makeStyles((theme) => ({
     padding: '1rem 2rem',
   },
   inputField: {
-    background: 'rgba(255, 255, 255, 0.8)',
-    width: '350px',
-    height: '45px',
-    paddingLeft: '20px',
-    borderRadius: 30,
-    margin: '10px',
-    '&:focus': {
-      border: 'none',
-      cssOutlinedInput: {
-        '&$cssFocused $notchedOutline': {
-          border: `none`,
-        },
-      },
-    },
+    borderRadius: '25px',
+  },
+  inputAlign: {
+    display: 'inline-block',
+    width: '48%',
+    marginRight: '2%',
+    margin: 'auto',
   },
   paper: {
     display: 'flex',
@@ -48,10 +41,6 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: '100%',
     marginTop: theme.spacing(1),
-  },
-  input: {
-    borderRadius: '25px',
-    background: 'rgba(255, 255, 255, 0.3)',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -92,51 +81,56 @@ export default function Register() {
             Sign up
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
-            <div>
-              <InputBase
-                required
-                id="firstname"
-                name="firstname"
-                onChange={handleChange}
-                autoComplete="firstname"
-                placeholder="firstname"
-                className={classes.inputField}
-              />
-              <InputBase
-                required
-                id="lastname"
-                name="lastname"
-                onChange={handleChange}
-                autoComplete="lastname"
-                placeholder="lastname"
-                className={classes.inputField}
-              />
-            </div>
-            <div>
-              <InputBase
-                required
-                fullWidth
-                id="email"
-                name="email"
-                onChange={handleChange}
-                autoComplete="email"
-                placeholder="email"
-                className={classes.inputField}
-              />
-            </div>
-            <div>
-              <InputBase
-                required
-                fullWidth
-                name="password"
-                type="password"
-                id="password"
-                onChange={handleChange}
-                autoComplete="current-password"
-                placeholder="password"
-                className={classes.inputField}
-              />
-            </div>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              id="firstname"
+              name="firstname"
+              onChange={handleChange}
+              autoComplete="firstname"
+              label="firstname"
+              className={`${classes.inputField} ${classes.inputAlign}`}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              id="lastname"
+              name="lastname"
+              onChange={handleChange}
+              autoComplete="lastname"
+              label="lastname"
+              className={`${classes.inputField} ${classes.inputAlign}`}
+            />
+
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              name="email"
+              onChange={handleChange}
+              autoComplete="email"
+              label="email"
+              className={classes.inputField}
+            />
+
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              type="password"
+              id="password"
+              onChange={handleChange}
+              autoComplete="current-password"
+              label="password"
+              className={classes.inputField}
+            />
+
             <Button
               type="submit"
               fullWidth
