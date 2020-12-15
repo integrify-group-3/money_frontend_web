@@ -1,10 +1,16 @@
 .App {
-  text-align: center;
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+:root {
+  --primary: #865CFF;
 }
 
 @media (prefers-reduced-motion: no-preference) {

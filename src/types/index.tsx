@@ -3,6 +3,10 @@ export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 export const TOGGLE_DIALOG = 'TOGGLE_DIALOG'
 
+//user action types
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAIL = 'LOGIN_FAIL'
+
 // Enum
 export enum DialogType {
   SignIn = 'signIn',
@@ -51,6 +55,30 @@ export type UiState = {
   dialogOpen: {
     [key in DialogType]?: boolean
   }
+}
+export type User = {
+
+}
+
+export type LoginUserFailAction = {
+  type: typeof LOGIN_FAIL
+
+}
+
+export type LoginUserSuccessAction = {
+  type: typeof LOGIN_SUCCESS
+  payload: {
+    
+  }
+
+}
+
+export type AuthActions =
+| LoginUserFailAction
+| LoginUserSuccessAction
+
+export type UserState = {
+
 }
 
 export type AppState = {
