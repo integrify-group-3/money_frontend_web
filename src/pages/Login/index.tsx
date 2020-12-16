@@ -13,14 +13,14 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 
-import { loginUser } from '../../redux/actions/auth'
+import { loginUser } from '../../redux/actions/user'
 
 import './style.scss'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    backgroundImage:
-      'linear-gradient(to right, rgba(243, 239, 234, 0.8), rgba(225, 219, 236, 0.8))',
+    background:
+      'linear-gradient(to right, rgba(243, 239, 234, 0.8), rgba(225, 255, 255, 0.8))',
     borderRadius: '25px',
     marginTop: '4rem',
     padding: '1rem 2rem',
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   input: {
-    borderRadius: '25px',
+    padding: '.3rem',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -82,7 +82,6 @@ export default function Login() {
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <TextField
-              variant="outlined"
               margin="normal"
               required
               fullWidth
@@ -94,7 +93,6 @@ export default function Login() {
               className={classes.input}
             />
             <TextField
-              variant="outlined"
               margin="normal"
               required
               fullWidth

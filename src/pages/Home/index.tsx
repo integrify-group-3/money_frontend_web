@@ -19,12 +19,13 @@ const useStyles = makeStyles((theme) => ({
     width: '400px',
     borderRadius: '10%',
     position: 'absolute',
-    top: '50%',
-    left: '50%',
+    top: '56%',
+    left: '33%',
     transform: 'translateY(-50%)',
   },
   HeaderStyle: {
     color: '#886DFA',
+    marginTop: '2rem' 
   },
   descStyle: {
     marginBottom: '20px',
@@ -49,7 +50,7 @@ export default function Home() {
           iMoney
         </Typography>
         <Typography color="primary" variant="h6" className={classes.descStyle}>
-          Couse your cash matters
+          Cause your cash matters
         </Typography>
         <Button
           component={Link}

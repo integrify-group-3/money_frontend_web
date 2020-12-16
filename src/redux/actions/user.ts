@@ -4,15 +4,26 @@ import axios from 'axios'
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  AuthActions,
+  UserActions,
+  User
 } from '../../types'
 
+import {
+  showErrors,
+  clearErrors
+} from './error'
 
-export function loginSuccess(): AuthActions {
+export function loginFail(): UserActions {
+  return {
+    type: LOGIN_FAIL
+  }
+}
+export function loginSuccess(user: User, token: string): UserActions {
   return {
     type: LOGIN_SUCCESS,
     payload: {
-
+      user,
+      token
     }
   }
 }

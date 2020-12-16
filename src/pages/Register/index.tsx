@@ -12,7 +12,7 @@ import {
   Container,
 } from '@material-ui/core'
 
-import { loginUser } from '../../redux/actions/auth'
+import { loginUser } from '../../redux/actions/user'
 
 import './style.scss'
 
@@ -25,11 +25,11 @@ const useStyles = makeStyles((theme) => ({
     padding: '1rem 2rem',
   },
   inputField: {
-    background: 'rgba(255, 255, 255, 0.8)',
+    background: 'rgba(255, 255, 255, 0.3)',
+    borderRadius: 30,
     width: '350px',
     height: '45px',
     paddingLeft: '20px',
-    borderRadius: 30,
     margin: '10px',
     '&:focus': {
       border: 'none',
