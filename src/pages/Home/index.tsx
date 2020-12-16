@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
   HeaderStyle: {
     color: '#886DFA',
-    marginTop: '2rem' 
+    marginTop: '2rem',
   },
   descStyle: {
     marginBottom: '20px',

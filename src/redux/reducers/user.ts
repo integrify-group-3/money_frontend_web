@@ -1,22 +1,16 @@
-import {
-  User,
-  UserState,
-  LOGIN_SUCCESS,
-  UserActions
-} from '../../types'
-
+import { User, UserState, LOGIN_SUCCESS, UserActions } from '../../types'
 
 export default function auth(
   state: UserState = {
     user: {} as User,
-    token: ''
+    token: '',
   },
   action: UserActions
 ): UserState {
-  switch(action.type) {
+  switch (action.type) {
   case LOGIN_SUCCESS:
     return {
-      ...state
+      ...state,
     }
   default:
     return state

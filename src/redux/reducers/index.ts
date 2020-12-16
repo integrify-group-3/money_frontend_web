@@ -8,7 +8,7 @@ const createRootReducer = () =>
   combineReducers({
     product,
     ui,
-    user
+    user,
   })
 
 export default createRootReducer

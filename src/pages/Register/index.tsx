@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { Formik } from 'formik'
 import Button from '@material-ui/core/Button'
+import * as yup from 'yup'
 import {
   CssBaseline,
-  InputBase,
+  TextField,
   makeStyles,
   Typography,
   Grid,
@@ -12,7 +14,7 @@ import {
   Container,
 } from '@material-ui/core'
 
-import { loginUser } from '../../redux/actions/user'
+import { registerUser } from '../../redux/actions/user'
 
 import './style.scss'
 
@@ -25,20 +27,13 @@ const useStyles = makeStyles((theme) => ({
     padding: '1rem 2rem',
   },
   inputField: {
-    background: 'rgba(255, 255, 255, 0.3)',
-    borderRadius: 30,
-    width: '350px',
-    height: '45px',
-    paddingLeft: '20px',
-    margin: '10px',
-    '&:focus': {
-      border: 'none',
-      cssOutlinedInput: {
-        '&$cssFocused $notchedOutline': {
-          border: `none`,
-        },
-      },
-    },
+    borderRadius: '25px',
+  },
+  inputAlign: {
+    display: 'inline-block',
+    width: '48%',
+    marginRight: '2%',
+    margin: 'auto',
   },
   paper: {
     display: 'flex',
@@ -48,10 +43,6 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: '100%',
     marginTop: theme.spacing(1),
-  },
-  input: {
-    borderRadius: '25px',
-    background: 'rgba(255, 255, 255, 0.3)',
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -64,25 +55,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
   const dispatch = useDispatch()
   const classes = useStyles()
-  const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  })
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault()
-    dispatch(loginUser(user))
-  }
-
-  const handleChange = (e: any) => {
-    const { name, value } = e.target
-    setUser({
-      ...user,
-      [name]: value,
-    })
-  }
   return (
     <div className="login-page-container">
       <Container component="main" maxWidth="xs" className={classes.container}>
@@ -91,68 +64,142 @@ export default function Register() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <form className={classes.form} onSubmit={handleSubmit} noValidate>
-            <div>
-              <InputBase
-                required
-                id="firstname"
-                name="firstname"
-                onChange={handleChange}
-                autoComplete="firstname"
-                placeholder="firstname"
-                className={classes.inputField}
-              />
-              <InputBase
-                required
-                id="lastname"
-                name="lastname"
-                onChange={handleChange}
-                autoComplete="lastname"
-                placeholder="lastname"
-                className={classes.inputField}
-              />
-            </div>
-            <div>
-              <InputBase
-                required
-                fullWidth
-                id="email"
-                name="email"
-                onChange={handleChange}
-                autoComplete="email"
-                placeholder="email"
-                className={classes.inputField}
-              />
-            </div>
-            <div>
-              <InputBase
-                required
-                fullWidth
-                name="password"
-                type="password"
-                id="password"
-                onChange={handleChange}
-                autoComplete="current-password"
-                placeholder="password"
-                className={classes.inputField}
-              />
-            </div>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              className={classes.submit}
-            >
-              Register
-            </Button>
-            <Grid container>
-              <Grid item>
-                <NavLink to="/login">
-                  {'Already have an account? Login'}
-                </NavLink>
-              </Grid>
-            </Grid>
-          </form>
+          <Formik
+            initialValues={{
+              firstName: '',
+              lastName: '',
+              email: '',
+              password: '',
+            }}
+            validationSchema={yup.object({
+              firstName: yup
+                .string()
+                .min(3, 'must be at least 3 character')
+                .max(20, 'firstname must between 3 and 20 characters')
+                .required('required field'),
+              lastName: yup
+                .string()
+                .min(3, 'must be at least 3 character')
+                .max(20, 'firstname must between 3 and 20 characters')
+                .required('required field'),
+              email: yup
+                .string()
+                .email('invalid email address')
+                .required('required field'),
+              password: yup
+                .string()
+                .min(3, 'must be at least 3 character')
+                .max(25, 'password must between 3 and 20 characters')
+                .required('Password is required'),
+            })}
+            onSubmit={(values, { resetForm }) => {
+              dispatch(registerUser(values))
+              resetForm()
+            }}
+          >
+            {(props: any) => (
+              <form
+                className={classes.form}
+                onSubmit={props.handleSubmit}
+                noValidate
+              >
+                <TextField
+                  value={props.values.firstName}
+                  onChange={props.handleChange}
+                  onBlur={props.handleBlur}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  helperText={
+                    props.touched.firstName ? props.errors.firstName : ''
+                  }
+                  error={
+                    props.touched.firstName && Boolean(props.errors.firstName)
+                  }
+                  id="firstName"
+                  name="firstName"
+                  autoComplete="firstName"
+                  label="firstNames"
+                  className={`${classes.inputField} ${classes.inputAlign}`}
+                />
+                <TextField
+                  value={props.values.lastName}
+                  onChange={props.handleChange}
+                  onBlur={props.handleBlur}
+                  helperText={
+                    props.touched.lastName ? props.errors.lastName : ''
+                  }
+                  error={
+                    props.touched.lastName && Boolean(props.errors.lastName)
+                  }
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  id="lastName"
+                  name="lastName"
+                  autoComplete="lastName"
+                  label="lastName"
+                  className={`${classes.inputField} ${classes.inputAlign}`}
+                />
+
+                <TextField
+                  value={props.values.email}
+                  onChange={props.handleChange}
+                  onBlur={props.handleBlur}
+                  helperText={props.touched.email ? props.errors.email : ''}
+                  error={props.touched.email && Boolean(props.errors.email)}
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  name="email"
+                  autoComplete="email"
+                  label="email"
+                  className={classes.inputField}
+                />
+
+                <TextField
+                  value={props.values.password}
+                  onChange={props.handleChange}
+                  onBlur={props.handleBlur}
+                  helperText={
+                    props.touched.password ? props.errors.password : ''
+                  }
+                  error={
+                    props.touched.password && Boolean(props.errors.password)
+                  }
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  label="password"
+                  className={classes.inputField}
+                />
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  className={classes.submit}
+                  disabled={!props.isValid}
+                >
+                  Register
+                </Button>
+                <Grid container>
+                  <Grid item>
+                    <NavLink to="/login">
+                      {'Already have an account? Login'}
+                    </NavLink>
+                  </Grid>
+                </Grid>
+              </form>
+            )}
+          </Formik>
         </div>
         <Box mt={8}></Box>
       </Container>

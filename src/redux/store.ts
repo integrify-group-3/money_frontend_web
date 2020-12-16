@@ -16,8 +16,8 @@ const initState: AppState = {
   user: {
     user: {} as User,
     token: '',
-    isAuthenticated: false
-  }
+    isAuthenticated: false,
+  },
 }
 
 export default function makeStore(initialState = initState) {

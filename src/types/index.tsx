@@ -6,6 +6,7 @@ export const TOGGLE_DIALOG = 'TOGGLE_DIALOG'
 //user action types
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 export const SHOW_ERRORS = 'SHOW_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
@@ -59,29 +60,30 @@ export type UiState = {
   }
 }
 export type User = {
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string,
-  
+  firstName: string
+  lastName: string
+  email: string
+  password: string
 }
 
 export type LoginUserFailAction = {
   type: typeof LOGIN_FAIL
-
 }
 
 export type LoginUserSuccessAction = {
   type: typeof LOGIN_SUCCESS
-  payload: {
-    user: User,
-    token: string
-  }
+  payload: {}
+}
+
+export type RegisterUserSuccessAction = {
+  type: typeof REGISTER_SUCCESS
+  payload: {}
 }
 
 export type UserActions =
-| LoginUserFailAction
-| LoginUserSuccessAction
+  | LoginUserFailAction
+  | LoginUserSuccessAction
+  | RegisterUserSuccessAction
 
 export type ShowErrorAction = {
   type: typeof SHOW_ERRORS
@@ -98,9 +100,9 @@ export type ClearErrorAction = {
 export type ErrorActions = ShowErrorAction | ClearErrorAction
 
 export type UserState = {
-  user: User,
-  token: string,
-  isAuthenticated?: boolean 
+  user: User
+  token: string
+  isAuthenticated?: boolean
 }
 
 export type AppState = {
