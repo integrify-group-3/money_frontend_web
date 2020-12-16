@@ -14,7 +14,7 @@ import {
   Container,
 } from '@material-ui/core'
 
-import { registerUser } from '../../redux/actions/auth'
+import { registerUser } from '../../redux/actions/user'
 
 import './style.scss'
 

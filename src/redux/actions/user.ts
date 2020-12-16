@@ -1,15 +1,28 @@
 import { Dispatch } from 'redux'
 
-import { LOGIN_SUCCESS, AuthActions, REGISTER_SUCCESS } from '../../types'
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  UserActions,
+  User,
+  REGISTER_SUCCESS,
+} from '../../types'
 
-export function loginSuccess(): AuthActions {
+/* import { showErrors, clearErrors } from './error'
+ */
+export function loginFail(): UserActions {
+  return {
+    type: LOGIN_FAIL,
+  }
+}
+export function loginSuccess(user: User, token: string): UserActions {
   return {
     type: LOGIN_SUCCESS,
     payload: {},
   }
 }
 
-export function registerSuccess(): AuthActions {
+export function registerSuccess(user: User, token: string): UserActions {
   return {
     type: REGISTER_SUCCESS,
     payload: {},

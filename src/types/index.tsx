@@ -7,6 +7,8 @@ export const TOGGLE_DIALOG = 'TOGGLE_DIALOG'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
+export const SHOW_ERRORS = 'SHOW_ERRORS'
+export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
 // Enum
 export enum DialogType {
@@ -57,7 +59,12 @@ export type UiState = {
     [key in DialogType]?: boolean
   }
 }
-export type User = {}
+export type User = {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+}
 
 export type LoginUserFailAction = {
   type: typeof LOGIN_FAIL
@@ -73,14 +80,33 @@ export type RegisterUserSuccessAction = {
   payload: {}
 }
 
-export type AuthActions =
+export type UserActions =
   | LoginUserFailAction
   | LoginUserSuccessAction
   | RegisterUserSuccessAction
 
-export type UserState = {}
+export type ShowErrorAction = {
+  type: typeof SHOW_ERRORS
+  payload: {
+    msg: string
+    status?: number
+  }
+}
+
+export type ClearErrorAction = {
+  type: typeof CLEAR_ERRORS
+}
+
+export type ErrorActions = ShowErrorAction | ClearErrorAction
+
+export type UserState = {
+  user: User
+  token: string
+  isAuthenticated?: boolean
+}
 
 export type AppState = {
   product: ProductState
   ui: UiState
+  user: UserState
 }
