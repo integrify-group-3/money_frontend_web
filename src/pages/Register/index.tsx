@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Formik } from 'formik'
+import { Formik, Field, Form } from 'formik'
 import Button from '@material-ui/core/Button'
 import * as yup from 'yup'
 import {
@@ -89,7 +89,7 @@ export default function Register() {
               password: yup
                 .string()
                 .min(3, 'must be at least 3 character')
-                .max(25, 'password must between 3 and 20 characters')
+                .max(25, 'password must between 3 and 25 characters')
                 .required('Password is required'),
             })}
             onSubmit={(values, { resetForm }) => {
@@ -97,41 +97,24 @@ export default function Register() {
               resetForm()
             }}
           >
-            {(props: any) => (
-              <form
-                className={classes.form}
-                onSubmit={props.handleSubmit}
-                noValidate
-              >
-                <TextField
-                  value={props.values.firstName}
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
+            {({ errors, touched, isValid }) => (
+              <Form className={classes.form} noValidate>
+                <Field
                   variant="outlined"
                   margin="normal"
                   required
-                  helperText={
-                    props.touched.firstName ? props.errors.firstName : ''
-                  }
-                  error={
-                    props.touched.firstName && Boolean(props.errors.firstName)
-                  }
+                  helperText={touched.firstName ? errors.firstName : ''}
+                  error={touched.firstName && Boolean(errors.firstName)}
                   id="firstName"
                   name="firstName"
                   autoComplete="firstName"
                   label="firstNames"
                   className={`${classes.inputField} ${classes.inputAlign}`}
+                  as={TextField}
                 />
-                <TextField
-                  value={props.values.lastName}
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  helperText={
-                    props.touched.lastName ? props.errors.lastName : ''
-                  }
-                  error={
-                    props.touched.lastName && Boolean(props.errors.lastName)
-                  }
+                <Field
+                  helperText={touched.lastName ? errors.lastName : ''}
+                  error={touched.lastName && Boolean(errors.lastName)}
                   variant="outlined"
                   margin="normal"
                   required
@@ -140,14 +123,12 @@ export default function Register() {
                   autoComplete="lastName"
                   label="lastName"
                   className={`${classes.inputField} ${classes.inputAlign}`}
+                  as={TextField}
                 />
 
-                <TextField
-                  value={props.values.email}
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  helperText={props.touched.email ? props.errors.email : ''}
-                  error={props.touched.email && Boolean(props.errors.email)}
+                <Field
+                  helperText={touched.email ? errors.email : ''}
+                  error={touched.email && Boolean(errors.email)}
                   variant="outlined"
                   margin="normal"
                   required
@@ -157,18 +138,12 @@ export default function Register() {
                   autoComplete="email"
                   label="email"
                   className={classes.inputField}
+                  as={TextField}
                 />
 
-                <TextField
-                  value={props.values.password}
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  helperText={
-                    props.touched.password ? props.errors.password : ''
-                  }
-                  error={
-                    props.touched.password && Boolean(props.errors.password)
-                  }
+                <Field
+                  helperText={touched.password ? errors.password : ''}
+                  error={touched.password && Boolean(errors.password)}
                   variant="outlined"
                   margin="normal"
                   required
@@ -179,6 +154,7 @@ export default function Register() {
                   autoComplete="current-password"
                   label="password"
                   className={classes.inputField}
+                  as={TextField}
                 />
 
                 <Button
@@ -186,7 +162,7 @@ export default function Register() {
                   fullWidth
                   variant="contained"
                   className={classes.submit}
-                  disabled={!props.isValid}
+                  disabled={!isValid}
                 >
                   Register
                 </Button>
@@ -197,7 +173,7 @@ export default function Register() {
                     </NavLink>
                   </Grid>
                 </Grid>
-              </form>
+              </Form>
             )}
           </Formik>
         </div>
