@@ -9,6 +9,7 @@ export const LOGIN_FAIL = 'LOGIN_FAIL'
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 export const SHOW_ERRORS = 'SHOW_ERRORS'
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
+export const REGISTER_FAIL = 'REGISTER_FAIL'
 
 // Enum
 export enum DialogType {
@@ -70,6 +71,13 @@ export type LoginUserFailAction = {
   type: typeof LOGIN_FAIL
 }
 
+export type RegisterFailAction = {
+  type: typeof REGISTER_FAIL
+  payload: {
+    user: User
+  }
+}
+
 export type LoginUserSuccessAction = {
   type: typeof LOGIN_SUCCESS
   payload: {}
@@ -84,6 +92,7 @@ export type UserActions =
   | LoginUserFailAction
   | LoginUserSuccessAction
   | RegisterUserSuccessAction
+  | RegisterFailAction
 
 export type ShowErrorAction = {
   type: typeof SHOW_ERRORS
@@ -100,9 +109,10 @@ export type ClearErrorAction = {
 export type ErrorActions = ShowErrorAction | ClearErrorAction
 
 export type UserState = {
-  user: User
+  user: User | any
   token: string
   isAuthenticated?: boolean
+  error: string
 }
 
 export type AppState = {
