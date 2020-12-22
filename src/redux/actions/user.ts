@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux'
+import axios from 'axios'
 
 import {
   LOGIN_SUCCESS,
@@ -30,9 +31,19 @@ export function registerSuccess(user: User, token: string): UserActions {
 }
 
 export function loginUser({ email, password }: any) {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch, getState: any) => {
     try {
-      console.log('connected to actions', email, password)
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+      const body = JSON.stringify({ email, password})
+      tokenConfig(getState)
+      const url = 'http://localhost:3000/api/v1/user/login'
+      const res = await axios.post(url, body, config)
+      console.log(config)
+      console.log(res)
     } catch (err) {
       console.log(err)
     }
@@ -47,4 +58,21 @@ export function registerUser({ firstName, lastName, email, password }: any) {
       console.log(err)
     }
   }
+}
+
+export const tokenConfig = (getState: any) => {
+  //gets the token from localstorage
+  // const token = getState().user.token
+  const token = localStorage.getItem('token')
+  console.log('token here', token)
+  const config = {
+    headers: {
+      'Content-type': 'application/json',
+      'x-auth-token': '',
+    },
+  }
+  if (token) {
+    config.headers['x-auth-token'] = token
+  }
+  return config
 }
