@@ -1,4 +1,5 @@
 import {
+  User,
   UserState,
   LOGIN_SUCCESS,
   UserActions,
@@ -7,7 +8,7 @@ import {
 
 export default function auth(
   state: UserState = {
-    user: {},
+    user: {} as User,
     token: '',
     isAuthenticated: false,
     error: '',

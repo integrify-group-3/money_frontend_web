@@ -109,7 +109,7 @@ export type ClearErrorAction = {
 export type ErrorActions = ShowErrorAction | ClearErrorAction
 
 export type UserState = {
-  user: User | any
+  user: User | {}
   token: string
   isAuthenticated?: boolean
   error: string
