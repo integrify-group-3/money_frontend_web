@@ -70,6 +70,7 @@ export default function Register() {
               lastName: '',
               email: '',
               password: '',
+              repeatPassword: '',
             }}
             validationSchema={yup.object({
               firstName: yup
@@ -91,6 +92,13 @@ export default function Register() {
                 .min(3, 'must be at least 3 character')
                 .max(25, 'password must between 3 and 25 characters')
                 .required('Password is required'),
+              repeatPassword: yup
+                .string()
+                .test('passwords-match', 'Passwords must match', function (
+                  value
+                ) {
+                  return this.parent.password === value
+                }),
             })}
             onSubmit={(values, { resetForm }) => {
               dispatch(registerUser(values))
@@ -153,6 +161,24 @@ export default function Register() {
                   id="password"
                   autoComplete="current-password"
                   label="password"
+                  className={classes.inputField}
+                  as={TextField}
+                />
+                <Field
+                  helperText={
+                    touched.repeatPassword ? errors.repeatPassword : ''
+                  }
+                  error={
+                    touched.repeatPassword && Boolean(errors.repeatPassword)
+                  }
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="repeatPassword"
+                  type="password"
+                  id="repeatPassword"
+                  label="repeat password"
                   className={classes.inputField}
                   as={TextField}
                 />
