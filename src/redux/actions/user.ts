@@ -31,10 +31,10 @@ export function loginSuccess(user: User): UserActions {
   }
 }
 
-export function registerSuccess(user: User): UserActions {
+export function registerSuccess(user: User[]): UserActions {
   return {
     type: REGISTER_SUCCESS,
-    payload: {},
+    payload: user,
   }
 }
 
@@ -48,7 +48,12 @@ export function loginUser({ email, password }: any) {
   }
 }
 
-export const registerUser = ({ firstName, lastName, email, password }: any) => {
+export const registerUser = ({
+  firstName,
+  lastName,
+  email,
+  password,
+}: User) => {
   return (dispatch: Dispatch) => {
     axios
       .post('http://localhost:8000/api/v1/users', {
