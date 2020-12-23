@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 import clsx from 'clsx'
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles'
@@ -10,13 +12,13 @@ import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
-import Badge from '@material-ui/core/Badge'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import NotificationsIcon from '@material-ui/icons/Notifications'
 
-import {mainListItems, secondaryListItems} from '../NavList';
+import { AppState } from '../../types'
+import { logout } from '../../redux/actions/user'
+import {mainListItems, secondaryListItems} from '../NavList'
 
 
 const drawerWidth = 240;
@@ -94,16 +96,22 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 );
 
 const Navbar = () => {
+  const dispatch = useDispatch()
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const isAuthenticated = useSelector((state: AppState) => state.user.isAuthenticated)
+  const user = useSelector((state: AppState) => state.user.user)
+
   const handleDrawerOpen = () => {
     setOpen(true);
-  };
+  }
   const handleDrawerClose = () => {
     setOpen(false);
-  };
+  }
+  const logoutOnClick = () => {
+    dispatch(logout())
+  }
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -129,6 +137,14 @@ const Navbar = () => {
             iMoney
           </Typography>
         </Toolbar>
+        {
+          isAuthenticated &&
+          <Typography>
+            <p>{user.firstName} {user.lastName}</p>
+            <NavLink to="/" onClick={logoutOnClick}>Logout</NavLink>
+          </Typography>
+        }
+        
       </AppBar>
       <Drawer
         variant="permanent"

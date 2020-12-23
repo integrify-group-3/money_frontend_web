@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
@@ -13,7 +14,9 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 
+import { AppState } from '../../types'
 import { loginUser } from '../../redux/actions/user'
+import { clearErrors } from '../../redux/actions/error'
 
 import './style.scss'
 
@@ -48,21 +51,39 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     borderRadius: '50px',
   },
+  errorMsg: {
+    color: 'red',
+    textAlign: 'center',
+    marginTop: '1rem' 
+  }
 }))
 
-export default function Login() {
+export default function Login(props: any) {
+  console.log(props)
   const dispatch = useDispatch()
+  const isAuthenticated = useSelector((state: AppState) => state.user.isAuthenticated)
+  const errorMsg = useSelector((state: AppState) => state.error.msg.msg)
+
   const classes = useStyles()
   const [user, setUser] = useState({
     email: '',
     password: '',
   })
 
+  console.log('is authenticated', isAuthenticated)
+
   const handleSubmit = (e: any) => {
     e.preventDefault()
     dispatch(loginUser(user))
-    console.log(user)
   }
+
+  useEffect(() => {
+    if(isAuthenticated) {
+      console.log('user authenticated')
+      dispatch(clearErrors())
+      props.history.push('/dashboard')
+    }
+  }, [dispatch, isAuthenticated, props.history])
 
   const handleChange = (e: any) => {
     const { name, value } = e.target
@@ -70,7 +91,6 @@ export default function Login() {
       ...user,
       [name]: value,
     })
-    console.log(name, value)
   }
   return (
     <div className="login-page-container">
@@ -127,6 +147,9 @@ export default function Login() {
                   {"Don't have an account? Sign Up"}
                 </NavLink>
               </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item className={classes.errorMsg}>{errorMsg}</Grid>
             </Grid>
           </form>
         </div>

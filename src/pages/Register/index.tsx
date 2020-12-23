@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Formik, Field, Form } from 'formik'
 import Button from '@material-ui/core/Button'
 import * as yup from 'yup'
@@ -14,6 +14,7 @@ import {
   Container,
 } from '@material-ui/core'
 
+import { AppState } from '../../types'
 import { registerUser } from '../../redux/actions/user'
 
 import './style.scss'
@@ -50,11 +51,17 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     borderRadius: '50px',
   },
+  errorMsg: {
+    color: 'red',
+    textAlign: 'center',
+    marginTop: '1rem' 
+  }
 }))
 
 export default function Register() {
   const dispatch = useDispatch()
   const classes = useStyles()
+  const errorMsg = useSelector((state: AppState) => state.error.msg.msg)
 
   return (
     <div className="login-page-container">
@@ -198,6 +205,9 @@ export default function Register() {
                       {'Already have an account? Login'}
                     </NavLink>
                   </Grid>
+                </Grid>
+                <Grid container>
+                  <Grid item className={classes.errorMsg}>{errorMsg}</Grid>
                 </Grid>
               </Form>
             )}

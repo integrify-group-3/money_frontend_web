@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import thunk from 'redux-thunk'
 
-import { AppState } from '../types'
+import { AppState, User } from '../types'
 import createRootReducer from './reducers'
 import rootSaga from './sagas'
 
@@ -14,11 +14,15 @@ const initState: AppState = {
     dialogOpen: {},
   },
   user: {
-    user: {},
+    user: {} as User,
     token: '',
     isAuthenticated: false,
     error: '',
   },
+  error: {
+    msg: {},
+    status: null
+  }
 }
 
 export default function makeStore(initialState = initState) {
